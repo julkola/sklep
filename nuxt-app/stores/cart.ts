@@ -41,6 +41,6 @@ export const useCartStore =  defineStore('cart', {
     },
 
     getters: {
-        sum: (cart) => cart.products.reduce((sum, product)=> sum + product.sum, 0)
+        sum: (cart) => cart.products.reduce((sum, product)=> sum + product.sum, 0).toFixed(2)
     }
 })
