@@ -8,8 +8,19 @@ export const useCartStore =  defineStore('cart', {
     state: () => ({products: <ProductInCart[]>[]}),
     
     actions: {
+        getIndex(id:string) {
+            return this.products.findIndex((product) => product.id === id)
+        },
+        changeQuantity(id: string, newQuantity: number) {
+            const indexOfProductInCart = this.getIndex(id);
+            if (indexOfProductInCart !== -1) {
+                const product = this.products[indexOfProductInCart];
+                product.quantity = newQuantity;
+                product.sum = product.price * product.quantity;
+            }
+        },
         addToCart(id:string, quantity:number, price:number) {
-            const indexOfProductInCart = this.products.findIndex((product) => product.id === id)
+            const indexOfProductInCart = this.getIndex(id);
             if (indexOfProductInCart === -1) 
                 this.products.push({
                     id: id,
@@ -22,6 +33,10 @@ export const useCartStore =  defineStore('cart', {
                 product.quantity += quantity;
                 product.sum = product.price * product.quantity;
             }
+        },
+        removeFromCart(id: string) {
+            const indexOfProductInCart = this.getIndex(id);
+            if (indexOfProductInCart !== -1)  this.products.splice(indexOfProductInCart, 1)
         }
     },
 
