@@ -10,9 +10,10 @@ import UserIcon from './UserIcon.vue';
 <template>
     <header class="justify-between">
         <svg class="logo"></svg>
-        <div class="">
-            <div class="">
+        <div class="flex">
+            <div class="flex">
                 <input type="text">
+                <searchIcon></searchIcon>
             </div>
             <button>
                 <UserIcon></UserIcon>

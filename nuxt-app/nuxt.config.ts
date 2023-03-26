@@ -8,15 +8,11 @@ export default defineNuxtConfig({
         ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
       ],
     },
-    build: {
-        postcss: {
-          postcssOptions: {
-            plugins: {
-              tailwindcss: {},
-              autoprefixer: {},
-            },
-          },
-        },
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
     },
     css: [
         '@/assets/css/main.css',
