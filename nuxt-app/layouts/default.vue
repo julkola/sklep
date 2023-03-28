@@ -5,5 +5,6 @@
           <slot/>
         </div>
         <TheFooter/>
+        <TheCart/>
     </div>
 </template>

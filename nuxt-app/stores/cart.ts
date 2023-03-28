@@ -2,10 +2,12 @@ interface ProductInCart {
     id: string,
     quantity: number,
     price: number,
-    sum: number
+    availability: number
 }
-export const useCartStore =  defineStore('cart', {
-    state: () => ({products: <ProductInCart[]>[]}),
+export const useCartStore =  defineStore('cartStore', {
+    state: () => ({
+        products: [] as ProductInCart[]
+    }),
     
     actions: {
         getIndex(id:string) {
@@ -16,22 +18,20 @@ export const useCartStore =  defineStore('cart', {
             if (indexOfProductInCart !== -1) {
                 const product = this.products[indexOfProductInCart];
                 product.quantity = newQuantity;
-                product.sum = product.price * product.quantity;
             }
         },
-        addToCart(id:string, quantity:number, price:number) {
+        addToCart(id:string, quantity:number, price:number, availability:number) {
             const indexOfProductInCart = this.getIndex(id);
             if (indexOfProductInCart === -1) 
                 this.products.push({
                     id: id,
                     quantity: quantity,
                     price: price,
-                    sum: price*quantity
+                    availability: availability
                 })
             else {
                 const product = this.products[indexOfProductInCart];
                 product.quantity += quantity;
-                product.sum = product.price * product.quantity;
             }
         },
         removeFromCart(id: string) {
@@ -41,6 +41,13 @@ export const useCartStore =  defineStore('cart', {
     },
 
     getters: {
-        sum: (cart) => cart.products.reduce((sum, product)=> sum + product.sum, 0).toFixed(2)
-    }
+        sum: (cart) => cart.products.reduce((sum, product)=> sum + product.quantity*product.price, 0).toFixed(2),
+        getProduct: (cart) => {
+            return (id: string) => {
+                const index = cart.products.findIndex((product) => product.id === id);
+                return index !== -1 ? cart.products[index] : null;
+            }
+        }
+    },
+    persist: true,
 })

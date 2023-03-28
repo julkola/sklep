@@ -9,6 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.3.2",
     "postcss": "^8.4.21",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.7",
-    "pinia": "^2.0.33"
+    "pinia": "^2.0.33",
+    "pinia-plugin-persistedstate": "^3.1.0"
   }
 }

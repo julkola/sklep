@@ -5,6 +5,17 @@
             <div class="ml-4">
                 <h1 class="text-lg font-bold">{{ product.name }}</h1>
                 <p>{{ product.desc }}</p>
+                <div class="flex flex-wrap py-1">
+                    <nuxt-link
+                        v-for="variant in product.variants"
+                        class="border-gray-900 border-2 rounded-full px-3 text-sm mr-1 last:mr-0 my-1"
+                        :disabled="variant.id === product.id"
+                        :to="variant.id"
+                        :class="variant.id === product.id ? 'bg-gray-900 text-white' : ''"
+                    >
+                        {{ variant.variantName }}
+                    </nuxt-link>
+                </div>
                 <div class="flex">
                     <div class="relative">
                         <button @click="decreaseQuantity" :disabled="addToCartQuantity === 1" class="absolute left-0 w-8 h-8 bg-gray-400 text-white rounded-full">-</button>
@@ -23,16 +34,33 @@
 import { useCartStore } from '~~/stores/cart';
 
 const cart = useCartStore();
-const addToCartQuantity = ref(1);
+const route = useRoute();
+
 const product = {
-    id: "1234",
+    id: route.params.id as string,
     name: "Anwen - Spanwen - Kula do Kąpieli o Zapachu Bzu - 100g",
     desc: "Kula do kąpieli o zapachu bzu",
     price: 28.30,
     available: 12,
     poducerId: "123",
     producerName: "SkinTra",
+    variants: [
+        {
+            id: "1231",
+            variantName: "Magnolia"
+        },
+        {
+            id: "1232",
+            variantName: "Róża"
+        },
+        {
+            id: "1234",
+            variantName: "Bez"
+        },
+    ]
 }
+const productInCart = cart.getProduct(product.id);
+const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
 function increaseQuantity () {
     if (addToCartQuantity.value < product.available) addToCartQuantity.value++;
 }
@@ -44,6 +72,6 @@ watchEffect(()=>{
     else if (addToCartQuantity.value > product.available) addToCartQuantity.value = product.available;
 })
 function addToCart() {
-    cart.addToCart(product.id, addToCartQuantity.value, product.price)
+    cart.addToCart(product.id, addToCartQuantity.value, product.price, product.available)
 }
 </script>
