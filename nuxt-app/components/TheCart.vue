@@ -6,9 +6,10 @@
         </div>
         <div class="py-2 px-3">
             <div v-for="product in cart.products" class="flex items-stretch mb-4 last:mb-0 p-2 bg-gray-200">
-                <img :src="product.id" alt="product.id" class="w-16 h-16 bg-gray-600 rounded">
+                <img :src="product.id" :alt="product.id" class="w-16 h-16 bg-gray-600 rounded">
                 <div class="flex-1 text-right">
                     <p>{{product.id}}</p>
+                    <button @click="cart.removeFromCart(product.id)">x</button>
                     <div class="flex w-full">
                         <span class="flex-1">{{product.quantity}} x {{product.price}}zł</span>
                         <button @click="decrease(product)" class="rounded bg-zinc-700 text-white w-6 h-6">-</button>

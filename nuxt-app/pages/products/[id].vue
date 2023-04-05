@@ -32,14 +32,28 @@
 </template>
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/cart';
+interface Variant {
+    id:  string,
+    variantName:  string,
+}
+interface Product {
+    id: string,
+    name: string,
+    desc:  string,
+    price: number,
+    available: number,
+    poducerId:  string,
+    producerName:  string,
+    variants: Variant[]
+}
 
 const cart = useCartStore();
 const route = useRoute();
-const { data: product} = useFetch(`/api/product/${route.params.id}`)
+const product = useFetch(`/api/product/${route.params.id}`).data
 const productInCart = cart.getProduct(product.id);
 const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
 function increaseQuantity () {
-    if (addToCartQuantity.value < product.available) addToCartQuantity.value++;
+    if (addToCartQuantity.value < product.value!.available) addToCartQuantity.value++;
 }
 function decreaseQuantity () {
     if (addToCartQuantity.value > 1) addToCartQuantity.value--;
@@ -49,6 +63,6 @@ watchEffect(()=>{
     else if (addToCartQuantity.value > product.available) addToCartQuantity.value = product.available;
 })
 function addToCart() {
-    cart.addToCart(product.id, addToCartQuantity.value, product.price, product.available)
+    cart.addToCart(product.value!.id, addToCartQuantity.value, product.value!.price, product.value!.available)
 }
 </script>

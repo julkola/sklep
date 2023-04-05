@@ -5,6 +5,9 @@
           <slot/>
         </div>
         <TheFooter/>
-        <TheCart/>
+        <TheCart v-if="isCartOpen"/>
     </div>
 </template>
+<script setup lang="ts">
+  const isCartOpen = ref(false);
+</script>

@@ -1,6 +1,6 @@
 <template>
   <main>
     <HeroSlider/>
-    <nuxt-link to="products/1234">Product</nuxt-link>
+    <nuxt-link to="products/">Product</nuxt-link>
   </main>
 </template>
