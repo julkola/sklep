@@ -50,7 +50,7 @@ interface Product {
 const cart = useCartStore();
 const route = useRoute();
 const product = useFetch(`/api/product/${route.params.id}`).data
-const productInCart = cart.getProduct(product.id);
+const productInCart = cart.getProduct(product.value.id);
 const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
 function increaseQuantity () {
     if (addToCartQuantity.value < product.value!.available) addToCartQuantity.value++;
@@ -59,10 +59,10 @@ function decreaseQuantity () {
     if (addToCartQuantity.value > 1) addToCartQuantity.value--;
 }
 watchEffect(()=>{
-    if (addToCartQuantity.value < 1) addToCartQuantity.value = 1;
-    else if (addToCartQuantity.value > product.available) addToCartQuantity.value = product.available;
+    if (+addToCartQuantity.value < 1) addToCartQuantity.value = 1;
+    else if (+addToCartQuantity.value > product.value.available) addToCartQuantity.value = product.value.available;
 })
 function addToCart() {
-    cart.addToCart(product.value!.id, addToCartQuantity.value, product.value!.price, product.value!.available)
+    cart.addToCart(product.value!.id, +addToCartQuantity.value, product.value!.price, product.value!.available)
 }
 </script>
