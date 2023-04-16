@@ -2,7 +2,7 @@
     <div class="fixed top-0 bottom-0 right-0 overflow-y-auto w-96 bg-white border-l-2 border-gray-900">
         <div class="flex justify-between border-b-2 border-gray-900">
             <span>Koszyk</span>
-            <button>X</button>
+            <button @click="emits('closeCart')">X</button>
         </div>
         <div class="py-2 px-3">
             <div v-for="product in cart.products" class="flex items-stretch mb-4 last:mb-0 p-2 bg-gray-200">
@@ -37,6 +37,8 @@ interface ProductInCart {
     price: number,
     availability: number,
 }
+
+const emits = defineEmits(["closeCart"]);
 
 function increase (product: ProductInCart) {
     if(product.quantity < product.availability) product.quantity++;

@@ -24,7 +24,7 @@ import UserIcon from './UserIcon.vue';
                 <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
                     <HeartIcon></HeartIcon>
                 </button>
-                <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 px-4 h-10">
+                <button @click="emits('openCart')" class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 px-4 h-10">
                     <BasketIcon class="mr-2"></BasketIcon>
                     <span>
                         {{ cart.sum }}&nbsp;zł
@@ -42,4 +42,5 @@ import UserIcon from './UserIcon.vue';
 <script setup lang="ts">
 import { useCartStore } from "~/stores/cart";
 const cart = useCartStore();
+const emits = defineEmits(["openCart"]);
 </script>

@@ -8,7 +8,7 @@
                     <BasketIcon/>
                 </button>
             </div>
-            <p class="text-sm">{{ product.name }}</p>
+            <NuxtLink :to="`/products/${product.id}`" class="text-sm">{{ product.name }}</NuxtLink>
             <p class="text-right mt-2 font-semibold flex-1 flex items-end justify-end">
                 {{ product.price.toFixed(2) }}zł
             </p>
