@@ -7,7 +7,7 @@
                     <NuxtLink v-for="subCategory in currentCategory.subCategories" :to="`/category/${subCategory.id}`">{{ subCategory.name }}</NuxtLink>
                 </div>
             </div>
-            <div id="filters"></div>
+            <Filters :filters="filters" />
         </div>
         <div class="flex-1 ">
             <h1 class="font-bold text-xl mb-4">{{ currentCategory.name }}</h1>
@@ -33,7 +33,7 @@
 import { useCartStore } from '~~/stores/cart';
 
 const cart = useCartStore();
-const products = useFetch(`/api/product`).data;
+const products = await useFetch(`/api/product`).data;
 
 const currentCategory = {
     id: 52432,
@@ -49,4 +49,47 @@ const currentCategory = {
         }
     ]
 }
+
+const filters = [
+    {
+        groupId: "1",
+        name: "Działanie",
+        options: [
+            {
+                id: 13432,
+                name: "Nawilżające"
+            },
+            {
+                id: 13433,
+                name: "Oczyszczające"
+            },
+            {
+                id: 13434,
+                name: "Odżywcze"
+            },
+            {
+                id: 13435,
+                name: "Wygładzające"
+            }
+        ]
+    },
+    {
+        groupId: "2",
+        name: "Składniki aktywe",
+        options: [
+            {
+                id: 43432,
+                name: "Aloes"
+            },
+            {
+                id: 43433,
+                name: "Peptydy"
+            },
+            {
+                id: 43434,
+                name: "Proteiny"
+            }
+        ]
+    }
+]
 </script>

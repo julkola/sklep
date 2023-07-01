@@ -49,7 +49,7 @@ interface Product {
 
 const cart = useCartStore();
 const route = useRoute();
-const product = useFetch(`/api/product/${route.params.id}`).data
+const { data: product, pending, error }  = await useFetch(`/api/product/${route.params.id}`);
 const productInCart = cart.getProduct(product.value.id);
 const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
 function increaseQuantity () {
