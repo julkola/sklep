@@ -1,31 +1,51 @@
 <template>
-    <div class="fixed top-0 bottom-0 right-0 overflow-y-auto w-96 bg-white border-l-2 border-gray-900">
-        <div class="flex justify-between border-b-2 border-gray-900">
-            <span>Koszyk</span>
-            <button @click="emits('closeCart')">X</button>
-        </div>
-        <div class="py-2 px-3">
-            <div v-for="product in cart.products" class="flex items-stretch mb-4 last:mb-0 p-2 bg-gray-200">
-                <img :src="product.id" :alt="product.id" class="w-16 h-16 bg-gray-600 rounded">
-                <div class="flex-1 text-right">
-                    <p>{{product.id}}</p>
-                    <button @click="cart.removeFromCart(product.id)">x</button>
-                    <div class="flex w-full">
-                        <span class="flex-1">{{product.quantity}} x {{product.price}}zł</span>
-                        <button @click="decrease(product)" class="rounded bg-zinc-700 text-white w-6 h-6">-</button>
-                        <input type="text" inputmode="numeric" :value="product.quantity" class="rounded w-6 h-6 border-2 border-zinc-700 text-center">
-                        <button :disabled="product.quantity === product.availability" @click="increase(product)" class="rounded bg-zinc-700 text-white w-6 h-6">+</button>
-                        <span class="flex-1">{{(product.quantity*product.price).toFixed(2)}}zł</span>
+    <Transition name="cart">
+        <div v-if="open" class="cart" >
+            <div @click="emits('close')" class="bg-black bg-opacity-60 inset-0 fixed cart-bg"></div>
+            <div class="cart-body fixed top-0 bottom-0 right-0 p-4">
+                <div class="flex flex-col h-full py-4 px-6 w-96 bg-white shadow-lg rounded-lg ">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-semibold">Koszyk</span>
+                        <button @click="emits('close')" class="rounded-full w-8 h-8 shadow-lg">&times</button>
                     </div>
+                    <div
+                        v-if="cart.productsQuantity > 0"
+                        class="flex-1 flex flex-col"
+                    >
+                        <div v-if="freeShippingFrom !== false">
+                            <span class="text-sm">
+                                {{ freeShippingFrom > cart.sum ? `Brakuje tylko ${(freeShippingFrom - cart.sum).toFixed(2)}&nbsp;zł do darmowej dostawy` : "Darmowa dostawa!" }}
+                            </span>
+                            <div class="h-3 rounded-full shadow-inner relative">
+                                <div class="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gray-900 to-emerald-800 max-w-full"
+                                    :style="`width: calc(${cart.sum / freeShippingFrom * 100}%)`"
+                                >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-y-auto">
+                            <ProductInCart v-for="product in cart.products" :product="product"/>
+                        </div>
+                        <div class="text-right text-lg">
+                            <p>Suma:</p>
+                            <p class="font-bold">{{cart.sum.toFixed(2)}}</p>
+                        </div>
+                        <button
+                            class="bg-gray-900 disabled:bg-gray-200 disabled:text-gray-900 text-white rounded-full block my-4 py-1 px-6 shadow-lg"
+                        >
+                            Przejdź do koszyka
+                        </button>
+                    </div>
+                    <p
+                        v-else
+                        class="flex-1 flex justify-center items-center text-center text-xl font-semibold "
+                    >
+                        Brak produktów w koszyku
+                    </p>
                 </div>
-                
             </div>
         </div>
-        <div class="text-right">
-            <p>Suma:</p>
-            <p class="font-bold">{{cart.sum}}</p>
-        </div>
-    </div>
+    </Transition>
 </template>
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/cart';
@@ -38,12 +58,8 @@ interface ProductInCart {
     availability: number,
 }
 
-const emits = defineEmits(["closeCart"]);
+const { open } = defineProps(["open"]);
+const emits = defineEmits(["close"]);
 
-function increase (product: ProductInCart) {
-    if(product.quantity < product.availability) product.quantity++;
-}
-function decrease (product: ProductInCart) {
-    if(product.quantity > 1) product.quantity--;
-}
+const freeShippingFrom: (number | false) = 140;
 </script>

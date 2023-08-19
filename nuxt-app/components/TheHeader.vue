@@ -1,12 +1,3 @@
-
-import HeartIcon from './HeartIcon.vue';
-
-
-import UserIcon from './UserIcon.vue';
-
-
-import UserIcon from './UserIcon.vue';
-
 <template>
     <header class="">
         <div class="flex justify-between py-2 px-4 border-b-2 border-gray-900">
@@ -18,8 +9,11 @@ import UserIcon from './UserIcon.vue';
                         <searchIcon></searchIcon>
                     </button>
                 </div>
-                <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
+                <button class="relative flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
                     <UserIcon></UserIcon>
+                    <div class="absolute top-full right-0 mt-2 py-2 px-4 text-gray-900 bg-white shadow-lg">
+                        <NuxtLink to="/signin">Zaloguj&nbsp;się</NuxtLink>
+                    </div>
                 </button>
                 <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
                     <HeartIcon></HeartIcon>
@@ -27,7 +21,7 @@ import UserIcon from './UserIcon.vue';
                 <button @click="emits('openCart')" class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 px-4 h-10">
                     <BasketIcon class="mr-2"></BasketIcon>
                     <span>
-                        {{ cart.sum }}&nbsp;zł
+                        {{ cart.sum.toFixed(2) }}&nbsp;zł
                     </span>
                 </button>
             </div>

@@ -5,3 +5,40 @@
 html, body, #__nuxt {
     height: 100%;
 }
+.cart {
+  transition: opacity 1s ease-in-out;
+}
+.cart-enter-from,
+.cart-leave-to {
+  opacity: 90;
+}
+.cart-bg {
+  transition: opacity .3s ease-in-out;
+}
+.cart-enter-from .cart-bg,
+.cart-leave-to .cart-bg {
+  opacity: 0;
+}
+.cart-body {
+  transition: transform .5s ease-out;
+}
+.cart-enter-from .cart-body,
+.cart-leave-to .cart-body {
+  transform: translateX(100%);
+}
+
+.modal {
+  transition: opacity 1s ease-in-out;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-body {
+  transition: transform 1s ease-in-out;
+}
+.modal-enter-from .modal-body,
+.modal-leave-to .modal-body {
+    transform: translateY(100px);
+}

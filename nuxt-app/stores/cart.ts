@@ -41,13 +41,14 @@ export const useCartStore =  defineStore('cartStore', {
     },
 
     getters: {
-        sum: (cart) => cart.products.reduce((sum, product)=> sum + product.quantity*product.price, 0).toFixed(2),
+        sum: (cart) => cart.products.reduce((sum, product)=> sum + product.quantity*product.price, 0),
         getProduct: (cart) => {
             return (id: string) => {
                 const index = cart.products.findIndex((product) => product.id === id);
                 return index !== -1 ? cart.products[index] : null;
             }
-        }
+        },
+        productsQuantity: (cart) => cart.products.length,
     },
     persist: true,
 })
