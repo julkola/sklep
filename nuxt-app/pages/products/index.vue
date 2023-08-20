@@ -1,5 +1,5 @@
 <template>
-    <div class="flex px-4 py-4 ">
+    <div class="flex items-start px-4 py-4 ">
         <ListSidebar :showCatTree="!!currentCategoryId"/>
         <div class="flex-1 ">
             <h1 class="font-bold text-xl mb-4">

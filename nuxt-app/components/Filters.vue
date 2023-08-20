@@ -14,6 +14,12 @@
                 />
             </div>
         </div>
+        <button
+            type="submit"
+            class="sticky bottom-0 w-full mt-4 mb-2 rounded-full bg-gray-200 text-gray-900 shadow-lg py-1 px-6"
+        >
+            Filtruj
+        </button>
     </div>
 </template>
 <script setup lang="ts">

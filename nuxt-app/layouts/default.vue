@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col h-full">
-        <TheHeader @openCart="openCart()"/>
+        <TheHeader @openCart="isCartOpen = true"/>
         <div class="flex-1">
           <slot/>
         </div>
@@ -11,16 +11,21 @@
             Dodano do koszyka
           </template>
           <template #default>
-            YAY!
+            {{ cart.recentlyAdded?.id }} - {{ cart.recentlyAdded?.price }} - {{ cart.recentlyAdded?.quantity }}
           </template>
         </Modal>
 
     </div>
 </template>
 <script setup lang="ts">
+  import { useCartStore } from '~~/stores/cart';
   const isCartOpen = ref(false);
   const showModal = ref(false);
-  function openCart () {
-    isCartOpen.value = true;
-  }
+  const cart = useCartStore();
+  watch(
+    () => cart.recentlyAdded,
+    () => {
+      showModal.value = true;
+    }
+  )
 </script>

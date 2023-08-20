@@ -6,7 +6,8 @@ interface ProductInCart {
 }
 export const useCartStore =  defineStore('cartStore', {
     state: () => ({
-        products: [] as ProductInCart[]
+        products: [] as ProductInCart[],
+        recentlyAdded: null as (ProductInCart | null),
     }),
     
     actions: {
@@ -32,6 +33,12 @@ export const useCartStore =  defineStore('cartStore', {
             else {
                 const product = this.products[indexOfProductInCart];
                 product.quantity += quantity;
+            }
+            this.recentlyAdded = {
+                id: id,
+                quantity: quantity,
+                price: price,
+                availability: availability
             }
         },
         removeFromCart(id: string) {

@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     const categoryId = match ? match.groups?.categoryId : null;
     if (categoryId) {
         return navigateTo({path: "/products", query: {
-            category: 10
+            category: categoryId
         }})
     }
 })
