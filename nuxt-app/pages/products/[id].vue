@@ -36,7 +36,6 @@
 </template>
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/cart';
-
 const cart = useCartStore();
 const route = useRoute();
 const { data: product, pending, error }  = await useFetch(`/api/product/${route.params.id}`);

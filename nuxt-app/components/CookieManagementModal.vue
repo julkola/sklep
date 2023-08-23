@@ -24,6 +24,14 @@
                     </template>
                 </Accordion>
             </div>
+            <div class="flex justify-between my-4 px-2">
+                <button class="bg-gray-50 text-gray-900 rounded-full shadow px-6 py-2">
+                    Zapisz ustwienia
+                </button>
+                <button class="bg-gray-900 text-white rounded-full shadow px-6 py-2">
+                    Zaakceptuj wszystkie
+                </button>
+            </div>
         </template>
       </Modal>
 </template>
