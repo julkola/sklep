@@ -16,56 +16,15 @@
         </div>
         <button
             type="submit"
-            class="sticky bottom-0 w-full mt-4 mb-2 rounded-full bg-gray-200 text-gray-900 shadow-lg py-1 px-6"
+            class="sticky bottom-0 w-full mt-4 mb-2 rounded-full bg-gray-200 text-gray-900 shadow py-1 px-6"
         >
             Filtruj
         </button>
     </div>
 </template>
 <script setup lang="ts">
-const filters = [
-{
-    groupId: "1",
-    name: "Działanie",
-    options: [
-        {
-            id: 13432,
-            name: "Nawilżające"
-        },
-        {
-            id: 13433,
-            name: "Oczyszczające"
-        },
-        {
-            id: 13434,
-            name: "Odżywcze"
-        },
-        {
-            id: 13435,
-            name: "Wygładzające"
-        }
-    ]
-},
-{
-    groupId: "2",
-    name: "Składniki aktywe",
-    options: [
-        {
-            id: 43432,
-            name: "Aloes"
-        },
-        {
-            id: 43433,
-            name: "Peptydy"
-        },
-        {
-            id: 43434,
-            name: "Proteiny"
-        }
-    ]
-}
-]
-
+const idCategory = '1234';
+const { data: filters } = await useFetch(`/api/filters/${idCategory}`);
 const map: Map<string, Set<number>> = new Map();
 const values = ref(map);
 

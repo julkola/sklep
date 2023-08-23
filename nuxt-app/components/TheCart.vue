@@ -1,22 +1,30 @@
 <template>
     <Transition name="cart">
-        <div v-if="open" class="cart" >
-            <div @click="emits('close')" class="bg-black bg-opacity-60 inset-0 fixed cart-bg"></div>
-            <div class="cart-body fixed top-0 bottom-0 right-0 p-4">
-                <div class="flex flex-col h-full py-4 px-6 w-96 bg-white shadow-lg rounded-lg ">
+        <div v-if="open" class="cart z-50" >
+            <div
+                @click="emits('close')"
+                class="bg-black bg-opacity-60 inset-0 fixed cart-bg"
+            >
+            </div>
+            <div class="cart-body w-full sm:w-auto fixed top-0 bottom-0 right-0 p-4">
+                <div class="flex flex-col h-full py-4 px-6 sm:w-96 bg-white shadow-lg rounded-lg ">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="font-semibold">Koszyk</span>
-                        <button @click="emits('close')" class="rounded-full w-8 h-8 shadow-lg">&times</button>
+                        <span class="font-semibold">
+                            Koszyk
+                        </span>
+                        <button @click="emits('close')" class="rounded-full w-8 h-8 shadow-lg">
+                            &times
+                        </button>
                     </div>
                     <div
                         v-if="cart.productsQuantity > 0"
                         class="flex-1 flex flex-col"
                     >
-                        <div v-if="freeShippingFrom !== false">
+                        <div v-if="freeShippingFrom !== false" class="mb-4">
                             <span class="text-sm">
                                 {{ freeShippingFrom > cart.sum ? `Brakuje tylko ${(freeShippingFrom - cart.sum).toFixed(2)}&nbsp;zł do darmowej dostawy` : "Darmowa dostawa!" }}
                             </span>
-                            <div class="h-3 rounded-full shadow-inner relative">
+                            <div class="h-3 mt-2 rounded-full shadow-inner relative">
                                 <div class="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gray-900 to-emerald-800 max-w-full"
                                     :style="`width: calc(${cart.sum / freeShippingFrom * 100}%)`"
                                 >

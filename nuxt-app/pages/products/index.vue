@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-start px-4 py-4 ">
+    <div class="md:flex items-start px-4 py-4 ">
         <ListSidebar :showCatTree="!!currentCategoryId"/>
         <div class="flex-1 ">
             <h1 class="font-bold text-xl mb-4">
@@ -28,6 +28,7 @@
                     </p>
                 </div>
             </div>
+            <ListFooter :page="2" :perPage="30" :allOfferCount="1161"/>
         </div>
     </div>
 </template>

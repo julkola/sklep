@@ -4,16 +4,17 @@
             <ProductGallery/>
             <div class="ml-4">
                 <h1 class="text-lg font-bold">{{ product!.name }}</h1>
-                <p>{{ product!.desc }}</p>
-                <div class="flex flex-wrap py-1">
+                <div v-for="variant in product!.variantGroup" class="flex flex-wrap py-1">
+                    <span class="block">
+                        {{ variant.name }}
+                    </span>
                     <nuxt-link
-                        v-for="variant in product!.variants"
+                        v-for="value in variant.Product_variants"
                         class="border-gray-900 border-2 rounded-full px-3 text-sm mr-1 last:mr-0 my-1"
-                        :disabled="variant.id === product!.id"
-                        :to="variant.id"
-                        :class="variant.id === product!.id ? 'bg-gray-900 text-white' : ''"
+                        :to="`/products/${value.product_id}`"
+                        :class="value.product_id === product!.id ? 'bg-gray-900 text-white' : ''"
                     >
-                        {{ variant.variantName }}
+                        {{ value.value }}
                     </nuxt-link>
                 </div>
                 <div class="flex">
@@ -28,29 +29,19 @@
                 </div>
             </div>
         </div>
+        <div class="">
+            <p>{{ product!.desc }}</p>
+        </div>
     </main>
 </template>
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/cart';
-interface Variant {
-    id:  string,
-    variantName:  string,
-}
-interface Product {
-    id: string,
-    name: string,
-    desc:  string,
-    price: number,
-    available: number,
-    poducerId:  string,
-    producerName:  string,
-    variants: Variant[]
-}
 
 const cart = useCartStore();
 const route = useRoute();
 const { data: product, pending, error }  = await useFetch(`/api/product/${route.params.id}`);
-const productInCart = cart.getProduct(product.value.id);
+console.log(product.value?.variantGroup)
+const productInCart = cart.getProduct(`${product.value!.id}`);
 const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
 function increaseQuantity () {
     if (addToCartQuantity.value < product.value!.available) addToCartQuantity.value++;
@@ -60,9 +51,9 @@ function decreaseQuantity () {
 }
 watchEffect(()=>{
     if (+addToCartQuantity.value < 1) addToCartQuantity.value = 1;
-    else if (+addToCartQuantity.value > product.value.available) addToCartQuantity.value = product.value.available;
+    else if (+addToCartQuantity.value > product.value!.available) addToCartQuantity.value = product.value!.available;
 })
 function addToCart() {
-    cart.addToCart(product.value!.id, +addToCartQuantity.value, product.value!.price, product.value!.available)
+    cart.addToCart(`${product.value!.id}`, +addToCartQuantity.value, product.value!.price, product.value!.available)
 }
 </script>
