@@ -1,9 +1,9 @@
 <template>
-    <div class="md:flex items-start px-4 py-4 ">
-        <ListSidebar :showCatTree="!!currentCategoryId"/>
+    <div class="lg:flex items-start px-4 py-4 ">
+        <ListSidebar :showCatTree="false && !!currentCategoryId"/>
         <div class="flex-1 ">
             <h1 class="font-bold text-xl mb-4">
-                {{ currentCategory ? currentCategory.name : "Produkty" }}
+                {{ currentCategory && currentCategory.value ? currentCategory.value.name : "Produkty" }}
             </h1>
             <p class="mb-6">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum sapiente aut, fugit rerum rem atque pariatur deleniti quibusdam porro voluptate libero quod inventore corrupti eos illum suscipit voluptatum eveniet impedit!
@@ -39,6 +39,7 @@ const cart = useCartStore();
 const products = await useFetch(`/api/product`).data;
 const currentCategoryId = routeQuery.category;
 const currentCategory = currentCategoryId ? await useFetch(`/api/category/${currentCategoryId}`).data : null;
-if (currentCategory)
+if (currentCategory) {
     provide("currentCategoryData", readonly(currentCategory));
+}
 </script>

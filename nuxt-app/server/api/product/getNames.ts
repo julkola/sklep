@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     const { data: productNames, error: product_error} = await client
         .from('Product')
         .select('id,name')
-        .in('id', params)
+        .in('id', params as string[])
 
     if (product_error) throw createError({
         statusCode: +product_error.code,

@@ -1,6 +1,6 @@
 <template>
-    <header class="sticky top-0 inset-x-0 bg-white z-40">
-        <div class="flex justify-between py-2 px-4 sm:border-b-2 border-gray-900">
+    <header class="sticky top-0 inset-x-0 bg-white z-40 shadow">
+        <div class="flex justify-between py-2 px-4">
             <nuxtLogo></nuxtLogo>
             <div class="flex items-center">
                 <SearchBar/>
@@ -15,6 +15,7 @@
                 </button>
                 <button
                     @click="emits('openCart')"
+                    :disabled="route === 'cart'"
                     class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 sm:px-4 h-10 w-10 sm:w-auto"
                 >
                     <BasketIcon></BasketIcon>
@@ -40,6 +41,7 @@
 </template>
 <script setup lang="ts">
 import { useCartStore } from "~/stores/cart";
+const route = useRoute().name;
 const cart = useCartStore();
 const emits = defineEmits(["openCart"]);
 const showMenu = ref(false);

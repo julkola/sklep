@@ -40,5 +40,5 @@ html, body, #__nuxt {
 }
 .modal-enter-from .modal-body,
 .modal-leave-to .modal-body {
-    transform: translateY(100px);
+  transform: translateY(100px);
 }

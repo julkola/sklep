@@ -18,7 +18,6 @@ function handleExpand () {
 }
 function setHeight () {
     const thisHeight = `${accbody.value.firstElementChild!.getBoundingClientRect().height}px`;
-    console.log('ok', accbody.value.getBoundingClientRect());
     accbody.value.style.setProperty('--this-height', thisHeight)
 }
 

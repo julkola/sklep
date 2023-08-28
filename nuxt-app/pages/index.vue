@@ -1,6 +1,6 @@
 <template>
   <main>
-    <HeroSlider/>
+    <TheHeroSlider/>
     <nuxt-link to="products/">Product</nuxt-link>
 
   </main>

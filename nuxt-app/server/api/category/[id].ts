@@ -1,21 +1,22 @@
-const currentCategory = {
-    id: 52432,
-    name: "Do kąpieli",
-    subCategories: [
-        {
-            id: 43430,
-            name: "Kule do kąpieli",
-        },
-        {
-            id: 43431,
-            name: "Sole do kąpieli",
-        }
-    ],
-    parentCategory: {
-        id: 123131,
-        name: "Ciało"
-    }
-}
-export default defineEventHandler((event) => {
+import { serverSupabaseClient } from "#supabase/server";
+
+export default defineEventHandler(async (event) => {
+    const supabase = await serverSupabaseClient(event);
+    const { data: currentCategory, error} =
+        await supabase
+            .from('Category')
+            .select(`
+                *,
+                filters: Attributes (
+                    id,
+                    name,
+                    options: Attr_values (
+                        *
+                    )
+                ),
+                parent:parent_id(*)
+            `)
+            .eq('id', event.context.params!.id)
+            .single();
     return currentCategory;
 })

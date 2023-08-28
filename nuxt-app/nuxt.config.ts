@@ -25,5 +25,8 @@ export default defineNuxtConfig({
       '/account/*': {
         ssr: false,
       }
+    },
+    supabase: {
+      redirect: false,
     }
 })

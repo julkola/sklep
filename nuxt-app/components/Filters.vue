@@ -2,16 +2,17 @@
     <div id="filters">
         <div v-for="filter in filters">
             <span>
-                {{ filter.name }} {{ values.get(filter.groupId)?.size ?? "" }}
+                {{ filter.name }} {{ values.get(filter.id)?.size ?? "" }}
             </span>
             <div>
                 <Checkbox
                     v-for="option in filter.options"
-                    :id="`filter-${filter.groupId}-${option.id}`"
-                    :text="option.name"
+                    :id="`filter-${filter.id}-${option.id}`"
                     :modelValue="values"
-                    @update:modelValue="(val: boolean) => updateFilters(val, option.id, filter.groupId)"
-                />
+                    @update:modelValue="(val: boolean) => updateFilters(val, option.id, filter.id)"
+                >
+                    {{ option.value }}
+                </Checkbox>
             </div>
         </div>
         <button
@@ -23,8 +24,8 @@
     </div>
 </template>
 <script setup lang="ts">
-const idCategory = '1234';
-const { data: filters } = await useFetch(`/api/filters/${idCategory}`);
+const currentCategory = inject("currentCategoryData") as any;
+const filters = currentCategory.value.filters;
 const map: Map<string, Set<number>> = new Map();
 const values = ref(map);
 

@@ -25,10 +25,16 @@
                 </Accordion>
             </div>
             <div class="flex justify-between my-4 px-2">
-                <button class="bg-gray-50 text-gray-900 rounded-full shadow px-6 py-2">
+                <button
+                    @click="acceptedCookies = 'true'"
+                    class="bg-gray-50 text-gray-900 rounded-full shadow px-6 py-2"
+                >
                     Zapisz ustwienia
                 </button>
-                <button class="bg-gray-900 text-white rounded-full shadow px-6 py-2">
+                <button
+                    class="bg-gray-900 text-white rounded-full shadow px-6 py-2"
+                    @click="acceptedCookies = 'true'; showModal = false"
+                >
                     Zaakceptuj wszystkie
                 </button>
             </div>
@@ -36,7 +42,8 @@
       </Modal>
 </template>
 <script setup lang="ts">
-const showModal = ref(true);
+const acceptedCookies = useCookie("accept_cookies");
+const showModal = ref(!acceptedCookies.value);
 const policies = new Map<string, {name: string, lorem:string}>([
     [
         'analitycal',

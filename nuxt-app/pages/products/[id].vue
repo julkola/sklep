@@ -39,7 +39,6 @@ import { useCartStore } from '~~/stores/cart';
 const cart = useCartStore();
 const route = useRoute();
 const { data: product, pending, error }  = await useFetch(`/api/product/${route.params.id}`);
-console.log(product.value?.variantGroup)
 const productInCart = cart.getProduct(`${product.value!.id}`);
 const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
 function increaseQuantity () {
