@@ -4,12 +4,13 @@
             <nuxtLogo></nuxtLogo>
             <div class="flex items-center">
                 <SearchBar/>
-                <button class="relative flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
+                <button
+                    @click="emits('showLogin')"
+                    class="relative flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10"
+                >
                     <UserIcon></UserIcon>
-                    <div class="absolute top-full right-0 mt-2 py-2 px-4 text-gray-900 bg-white shadow-lg">
-                        <NuxtLink to="/signin">Zaloguj&nbsp;się</NuxtLink>
-                    </div>
                 </button>
+
                 <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
                     <HeartIcon></HeartIcon>
                 </button>
@@ -43,6 +44,6 @@
 import { useCartStore } from "~/stores/cart";
 const route = useRoute().name;
 const cart = useCartStore();
-const emits = defineEmits(["openCart"]);
+const emits = defineEmits(["openCart", "showLogin"]);
 const showMenu = ref(false);
 </script>

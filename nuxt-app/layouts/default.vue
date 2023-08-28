@@ -8,7 +8,7 @@
         <TheCart :open="isCartOpen" @close="isCartOpen = false"/>
         <RecentlyAddedModal/>
         <TheCookieManagementModal/>
-        <TheLoginModal/>
+        <TheLoginModal :showLogin="showLogin" @close="showLogin=false"/>
     </div>
 </template>
 <script setup lang="ts">

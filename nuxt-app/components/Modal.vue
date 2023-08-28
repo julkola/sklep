@@ -2,7 +2,7 @@
     <Transition appear name="modal">
         <div v-if="show" class="modal">
             <div @click="emits('close')" class="bg-black bg-opacity-60 inset-0 fixed"></div>
-            <div class="flex flex-col bg-white shadow-lg rounded-xl p-4 fixed inset-1/4 modal-body">
+            <div class="flex flex-col bg-white shadow-lg rounded-xl p-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 modal-body">
                 <div class="flex justify-between">
                     <span>
                         <slot name="header"></slot>

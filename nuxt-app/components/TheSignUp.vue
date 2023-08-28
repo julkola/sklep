@@ -44,14 +44,16 @@
         >
         <Checkbox
             id="termsAccpet"
-            text="Akceptuję regulamin i politykę prywatności"
             :model-value="termsAccpet"
-        />
+        >
+            Akceptuję regulamin i politykę prywatności
+        </Checkbox>
         <Checkbox
             id="newsletter"
-            text="Chcę otrzymywać newsletter"
             :model-value="newsletter"
-        />
+        >
+            Chcę otrzymywać newsletter
+        </Checkbox>
         <p class="text-sm">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus assumenda odit, et consectetur sequi numquam. Blanditiis ad illo porro culpa a magni, asperiores repellat ratione eum, iure nobis maxime ducimus.
         </p>
