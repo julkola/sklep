@@ -17,7 +17,8 @@
         </div>
         <button
             type="submit"
-            class="sticky bottom-0 w-full mt-4 mb-2 rounded-full bg-gray-200 text-gray-900 shadow py-1 px-6"
+            class="sticky bottom-0 w-full mt-4 mb-2 rounded-full bg-gradient-to-br from-gray-200 to-indigo-200 disabled:bg-gray-200 disabled:bg-none text-gray-900 shadow py-1 px-6"
+            :disabled="!filterChanged"
         >
             Filtruj
         </button>
@@ -28,6 +29,7 @@ const currentCategory = inject("currentCategoryData") as any;
 const filters = currentCategory.value.filters;
 const map: Map<string, Set<number>> = new Map();
 const values = ref(map);
+const filterChanged = ref(false);
 
 function updateFilters (v:boolean, opt:number, filterId:string) {
     if (!values.value.has(filterId)) values.value.set(filterId, new Set());

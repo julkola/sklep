@@ -33,11 +33,7 @@
                 <MobileMenu :showMenu="showMenu" @close="showMenu=false"/>
             </div>
         </div>
-        <div class="hidden sm:flex py-1 px-4 text-lg font-bold text-gray-900 border-b-2 border-gray-900">
-            <nuxt-link class="px-2 py-1 mr-4 last:mr-0 relative after:absolute after:h-1 after:bg-gray-900 after:rounded-full after:bottom-0 after:right-0 after:left-0 after:origin-left after:duration-150 after:scale-x-0 hover:after:scale-x-100 cursor-pointer">Włosy</nuxt-link>
-            <nuxt-link class="px-2 py-1 mr-4 last:mr-0 relative after:absolute after:h-1 after:bg-gray-900 after:rounded-full after:bottom-0 after:right-0 after:left-0 after:origin-left after:duration-150 after:scale-x-0 hover:after:scale-x-100 cursor-pointer">Ciało</nuxt-link>
-            <nuxt-link class="px-2 py-1 mr-4 last:mr-0 relative after:absolute after:h-1 after:bg-gray-900 after:rounded-full after:bottom-0 after:right-0 after:left-0 after:origin-left after:duration-150 after:scale-x-0 hover:after:scale-x-100 cursor-pointer">Twarz</nuxt-link>
-        </div>
+        <TheMenu/>
     </header>
 </template>
 <script setup lang="ts">

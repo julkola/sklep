@@ -1,4 +1,5 @@
 <template>
+    <NuxtLoadingIndicator />
     <div class="flex flex-col h-full">
         <TheHeader @openCart="isCartOpen = true" @showLogin="showLogin=true"/>
         <div class="flex-1 container mx-auto">

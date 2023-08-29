@@ -3,7 +3,7 @@
         <div v-show="open" class="cart z-50" >
             <div
                 @click="emits('close')"
-                class="bg-black bg-opacity-60 inset-0 fixed cart-bg"
+                class="bg-gray-900 bg-opacity-60 inset-0 fixed cart-bg"
             >
             </div>
             <div class="cart-body w-full sm:w-auto fixed top-0 bottom-0 right-0 p-4">
@@ -21,7 +21,7 @@
                         class="flex-1 flex flex-col"
                     >
                         <FreeShippingProgressBar />
-                        <div class="flex-1 overflow-y-auto">
+                        <div class="flex-1 overflow-y-auto px-4 -mx-4">
                             <ProductInCart v-for="product in cart.products" :product="product"/>
                         </div>
                         <div class="text-right text-lg">
@@ -30,7 +30,7 @@
                         </div>
                         <NuxtLink
                             to="/cart"
-                            class="text-center bg-gray-900 disabled:bg-gray-200 disabled:text-gray-900 text-white rounded-full block my-4 py-1 px-6 shadow-lg"
+                            class="text-center bg-gradient-to-br from-gray-200 to-indigo-200 disabled:bg-gray-200 text-gray-900 rounded-full block my-4 py-1 px-6 shadow-lg"
                         >
                             Przejdź do koszyka
                         </NuxtLink>
