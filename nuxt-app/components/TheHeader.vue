@@ -1,7 +1,9 @@
 <template>
     <header class="sticky top-0 inset-x-0 bg-white z-40 shadow">
         <div class="flex justify-between py-2 px-4">
-            <nuxtLogo></nuxtLogo>
+            <NuxtLink to="/">
+                <nuxtLogo></nuxtLogo>
+            </NuxtLink>
             <div class="flex items-center">
                 <SearchBar/>
                 <button

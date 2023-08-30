@@ -2,7 +2,7 @@
     <div class="relative mt-6">
         <label
             :for="name"
-            class="absolute top-0 -translate-y-1/2 mx-5 bg-white leading-tight font-semibold"
+            class="absolute top-0 -translate-y-1/2 mx-5 leading-tight font-semibold"
         >
             <slot/>
             <span v-if="required" class="text-teal-400">
@@ -15,7 +15,7 @@
             :name="name"
             :required="required"
             :placeholder="placeholder"
-            class="w-full px-6 pt-3 pb-2 shadow-inner rounded-xl"
+            class="w-full px-6 pt-3 pb-2 bg-slate-50 shadow-inner rounded-full"
         >
     </div>
 </template>

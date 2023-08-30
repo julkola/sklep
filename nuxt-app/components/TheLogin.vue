@@ -11,7 +11,7 @@
             name="username"
             id="username"
             v-model="props.username"
-            class="h-10 rounded-full border-gray-900 border-2 pl-4 pr-12 mb-3"
+            class="h-10 rounded-full bg-slate-50 shadow-inner pl-4 pr-12 mb-3"
         >
         <label for="password" class="mb-2">
             Hasło
@@ -21,7 +21,7 @@
             name="password"
             id="password"
             v-model="props.password"
-            class="h-10 rounded-full border-gray-900 border-2 pl-4 pr-12 mb-3"
+            class="h-10 rounded-full bg-slate-50 shadow-inner pl-4 pr-12 mb-3"
         >
         <div class="">
             <Checkbox id="remembreme">
@@ -33,7 +33,7 @@
         </div>
         <button
             type="submit"
-            class=" bg-gradient-to-tr to-teal-500 from-indigo-700 text-white rounded-full shadow-lg px-4 h-8"
+            class="bg-gradient-to-br from-gray-200 to-indigo-200 disabled:bg-gray-200 disabled:bg-none text-gray-900 rounded-full shadow-lg px-4 h-8"
         >
             Zaloguj się
         </button>

@@ -2,10 +2,11 @@ import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
     const supabase = await serverSupabaseClient(event);
-    const { data: currentCategory, error} =
+    const { data: products, error} =
         await supabase
-            .from('Category')
-            .select()
-            .is('parent_id', null)
-    return currentCategory;
+            .from('Product')
+            .select(`
+                *
+            `)
+    return products;
 })

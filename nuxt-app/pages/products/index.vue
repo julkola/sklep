@@ -1,6 +1,9 @@
 <template>
     <div class="lg:flex items-start px-4 py-4 ">
-        <ListSidebar :showCatTree="false && !!currentCategoryId"/>
+        <div class="w-60 mr-4 px-6 py-4 rounded shadow-lg">
+            <TheCategoryTree />
+            <Filters v-if="currentCategory?.filters.length > 0" class="mt-4" />
+        </div>
         <div class="flex-1 ">
             <h1 class="font-bold text-xl mb-4">
                 {{ currentCategory ? currentCategory.name : "Produkty" }}
@@ -28,17 +31,28 @@
                     </p>
                 </div>
             </div>
-            <ListFooter :page="2" :perPage="30" :allOfferCount="1161"/>
+            <ListFooter :page="currentPage" :perPage="perPage" :allOfferCount="allOfferCount"/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/cart';
-const routeQuery = useRoute().query;
 const cart = useCartStore();
 
-const products = await useFetch(`/api/product`).data;
+const routeQuery = useRoute().query;
 const currentCategoryId = routeQuery.category;
+
+const { data: products, error: productError, pending: prodcutsAreLoading } = await useFetch(`/api/product`, {
+    query: {
+        categoryId: currentCategoryId,
+        producerId: null
+    }
+});
+
+const currentPage = routeQuery.page ? +routeQuery.page : 1;
+const perPage = routeQuery.perPage ? +routeQuery.perPage : 10;
+const allOfferCount = products.value!.length;
+
 const { data: currentCategory, error, pending } = await useFetch(`/api/category/${currentCategoryId}`);
 provide("currentCategoryData", readonly(currentCategory));
 </script>

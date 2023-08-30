@@ -30,5 +30,5 @@
     </div>
 </template>
 <script setup lang="ts">
-const { data:categories, error, pending } = await useFetch('/api/category/main');
+const { data:categories, error, pending } = await useFetch('/api/category/all');
 </script>

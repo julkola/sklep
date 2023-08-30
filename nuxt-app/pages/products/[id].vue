@@ -3,55 +3,50 @@
         <div class="flex">
             <ProductGallery/>
             <div class="ml-4">
-                <h1 class="text-lg font-bold">{{ product!.name }}</h1>
-                <div v-for="variant in product!.variantGroup" class="flex flex-wrap py-1">
-                    <span class="block">
-                        {{ variant.name }}
-                    </span>
-                    <nuxt-link
-                        v-for="value in variant.Product_variants"
-                        class="border-gray-900 border-2 rounded-full px-3 text-sm mr-1 last:mr-0 my-1"
-                        :to="`/products/${value.product_id}`"
-                        :class="value.product_id === product!.id ? 'bg-gray-900 text-white' : ''"
+                <strong
+                    v-if="product.price"
+                    class="inline-block py-1 px-3 font-semibold rounded-md bg-emerald-100 text-teal-700"
+                >
+                    Promocja!
+                </strong>
+                <h1 class="text-xl font-bold">
+                    {{ product!.name }}
+                </h1>
+                <TheVariants :productId="product.id" :variant-groups="product.variantGroups"/>
+
+                <div class="flex flex-col items-end mt-4 mb-6 text-gray-900">
+                    <span
+                        v-if="product.price"
+                        class="relative text-xl font-semibold after:absolute after:h-[3px] after:bg-indigo-400 after:bg-opacity-70 after:w-full after:-rotate-6 after:left-0 after:top-1/2"
                     >
-                        {{ value.value }}
-                    </nuxt-link>
+                        {{ product.price.toFixed(2) }}&nbsp;zł
+                    </span>
+                    <span class="text-2xl font-bold">
+                        {{ product.price.toFixed(2) }}&nbsp;zł
+                    </span>
                 </div>
-                <div class="flex">
-                    <div class="relative">
-                        <button @click="decreaseQuantity" :disabled="addToCartQuantity === 1" class="absolute left-0 w-8 h-8 bg-gray-400 text-white rounded-full">-</button>
-                        <input v-model="addToCartQuantity" type="text" inputmode="numeric" class="w-32 h-8 px-12 text-center border-2 border-gray-900 rounded-full">
-                        <button @click="increaseQuantity" :disabled="addToCartQuantity === product!.available" class="absolute right-0 w-8 h-8 bg-gray-400 text-white rounded-full">+</button>
-                    </div>
-                    <button @click="addToCart" class="flex-1 bg-gray-900 text-white rounded-full">
-                        Dodaj do koszyka
+                    
+
+                <TheProductCartAdding :product-id="product.id" :max-quantity="product.available" :product-price="product.price"/>
+
+                <div class="flex justify-end items-center mt-6">
+                    <span>
+                        Dodaj do obserwowanych
+                    </span>
+                    <button class="flex items-center justify-center ml-4 rounded-full w-9 h-9 text-gray-600 bg-gray-200">
+                        <HeartIcon/>
                     </button>
                 </div>
             </div>
         </div>
         <div class="">
-            <p>{{ product!.desc }}</p>
+            <p>
+                {{ product.desc }}
+            </p>
         </div>
     </main>
 </template>
 <script setup lang="ts">
-import { useCartStore } from '~~/stores/cart';
-const cart = useCartStore();
 const route = useRoute();
 const { data: product, pending, error }  = await useFetch(`/api/product/${route.params.id}`);
-const productInCart = cart.getProduct(`${product.value!.id}`);
-const addToCartQuantity = productInCart ? ref(productInCart.quantity) : ref(1);
-function increaseQuantity () {
-    if (addToCartQuantity.value < product.value!.available) addToCartQuantity.value++;
-}
-function decreaseQuantity () {
-    if (addToCartQuantity.value > 1) addToCartQuantity.value--;
-}
-watchEffect(()=>{
-    if (+addToCartQuantity.value < 1) addToCartQuantity.value = 1;
-    else if (+addToCartQuantity.value > product.value!.available) addToCartQuantity.value = product.value!.available;
-})
-function addToCart() {
-    cart.addToCart(`${product.value!.id}`, +addToCartQuantity.value, product.value!.price, product.value!.available)
-}
 </script>

@@ -1,5 +1,4 @@
 import { serverSupabaseClient } from "#supabase/server";
-import { stringify } from "postcss";
 
 export default defineEventHandler(async (event) => {
     const ids = getQuery(event).ids as string[] | string;

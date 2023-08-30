@@ -1,21 +1,19 @@
 <template>
     <Modal :show="showLogin" @close="emits('close')">
-        <div class="relative grid grid-cols-2 w-96 mx-auto rounded-full my-2 bg-slate-200 shadow-inner">
+        <div class="relative grid grid-cols-2 w-96 mx-auto rounded-full my-2 bg-slate-50 text-gray-900 shadow-inner">
             <button
                 @click="signin=true"
-                :class="signin ? 'text-white' : ''" 
                 class="relative z-10 p-1"
             >
                 Zaloguj się
             </button>
             <button
                 @click="signin=false"
-                :class="!signin ? 'text-white' : ''"
                 class="relative z-10 p-1"
             >
                 Zarejetruj się
             </button>
-            <div class="absolute h-full w-1/2 bg-gradient-to-tr to-teal-500 from-indigo-700 rounded-full shadow-lg transition-transform duration-200  ease-out" :class="!signin ? 'translate-x-full' : ''"></div>
+            <div class="absolute h-full w-1/2 bg-gradient-to-br from-gray-200 to-indigo-200 rounded-full shadow-lg transition-transform duration-200  ease-out" :class="!signin ? 'translate-x-full' : ''"></div>
         </div>
         <div class="flex w-96 mx-auto overflow-hidden">
             <TheLogin 

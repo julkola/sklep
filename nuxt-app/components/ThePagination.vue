@@ -1,19 +1,25 @@
 <template>
     <div class="flex">
-        <a href="" class="flex items-center justify-center rounded-full text-white bg-gray-900 shadow h-8 w-8 mr-2">
+        <NuxtLink
+            to=""
+            class="flex items-center justify-center rounded-full text-white bg-gray-900 shadow h-8 w-8 mr-2"
+        >
             &laquo;
-        </a>
-        <a
+        </NuxtLink>
+        <NuxtLink
             v-for="pageNum in [currentPage, maxPage]"
-            href=""
+            to=""
             :class="pageNum === currentPage ? 'bg-gray-200' : ''"
             class="flex items-center justify-center rounded-full shadow h-8 w-8 mr-2"
         >
             {{ pageNum }}
-        </a>
-        <a href="" class="flex items-center justify-center rounded-full text-white bg-gray-900 shadow h-8 w-8">
+        </NuxtLink>
+        <NuxtLink
+            to=""
+            class="flex items-center justify-center rounded-full text-white bg-gray-900 shadow h-8 w-8"
+        >
             &raquo;
-        </a>
+        </NuxtLink>
     </div>
 </template>
 <script setup lang="ts">
