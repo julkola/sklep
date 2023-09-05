@@ -13,7 +13,7 @@
             </nuxt-link>
             <div
                 v-if="category.children.length > 0"
-                class="hidden group-hover:flex group-focus-within:flex absolute top-full left-0 flex-col p-4 shadow-lg rounded-md bg-white"
+                class="hidden group-hover:flex group-focus-visible:flex absolute top-full left-0 flex-col p-4 shadow-lg rounded-md bg-white"
             >
                 <nuxt-link
                     v-for="subcategory in category.children"

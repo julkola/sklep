@@ -22,11 +22,16 @@
                     >
                         <FreeShippingProgressBar />
                         <div class="flex-1 overflow-y-auto px-4 -mx-4">
-                            <ProductInCart v-for="product in cart.products" :product="product"/>
+                            <ProductInCart
+                                v-for="product in cart.products"
+                                :product="product"
+                            />
                         </div>
                         <div class="text-right text-lg">
                             <p>Suma:</p>
-                            <p class="font-bold">{{cart.sum.toFixed(2)}}</p>
+                            <p class="font-bold">
+                                {{cart.sum.toFixed(2)}}
+                            </p>
                         </div>
                         <NuxtLink
                             to="/cart"

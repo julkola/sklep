@@ -25,8 +25,8 @@
     </div>
 </template>
 <script setup lang="ts">
-const currentCategory = inject("currentCategoryData") as any;
-const filters = currentCategory.value.filters;
+const {currentCategory} = defineProps(["currentCategory"]);
+const filters = currentCategory.filters;
 const map: Map<string, Set<number>> = new Map();
 const values = ref(map);
 const filterChanged = ref(false);

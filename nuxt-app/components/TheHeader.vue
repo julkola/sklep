@@ -6,12 +6,29 @@
             </NuxtLink>
             <div class="flex items-center">
                 <SearchBar/>
-                <button
-                    @click="emits('showLogin')"
-                    class="relative flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10"
-                >
-                    <UserIcon></UserIcon>
-                </button>
+                <div class="relative group ml-4 ">
+                    <button
+                        @click="() =>{ if (!user) emits('showLogin') }"
+                        class="flex items-center justify-center bg-gray-900 text-white rounded-full w-10 h-10"
+                    >
+                        <UserIcon></UserIcon>
+                    </button>
+                    <div
+                        v-if="user"
+                        class="hidden group-hover:flex group-focus-visible:flex absolute top-full right-1/2 translate-x-1/2 flex-col p-4 shadow-lg rounded-md bg-white"
+                    >
+                        <button class="relative px-5 py-2 after:absolute after:bg-gray-100 after:shadow-lg after:rounded-md after:inset-0 after:duration-150 after:opacity-0 hover:after:opacity-100 text-left whitespace-nowrap">
+                            <span class="relative z-10">
+                                Wyloguj się
+                            </span>
+                        </button>
+                        <NuxtLink class="relative px-5 py-2 after:absolute after:bg-gray-100 after:shadow-lg after:rounded-md after:inset-0 after:duration-150 after:opacity-0 hover:after:opacity-100 cursor-pointer whitespace-nowrap">
+                            <span class="relative z-10">
+                                Moje konto
+                            </span>
+                        </NuxtLink>
+                    </div>
+                </div>
 
                 <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
                     <HeartIcon></HeartIcon>
@@ -40,6 +57,7 @@
 </template>
 <script setup lang="ts">
 import { useCartStore } from "~/stores/cart";
+const user = useSupabaseUser();
 const route = useRoute().name;
 const cart = useCartStore();
 const emits = defineEmits(["openCart", "showLogin"]);

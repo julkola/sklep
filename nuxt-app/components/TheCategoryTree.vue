@@ -41,6 +41,6 @@
     </div>
 </template>
 <script setup lang="ts">
-const currentCategory = inject("currentCategoryData");
+const { currentCategory } = defineProps(["currentCategory"]);
 const { data: categories, pending, error } = await useFetch("/api/category/main");
 </script>
