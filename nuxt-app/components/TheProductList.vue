@@ -11,7 +11,7 @@
                     @click="cart.addToCart(product.id,1,product.price,product.available)"
                     class="rounded-full bg-gray-900 shadow text-white w-8 h-8 flex justify-center items-center absolute bottom-3 right-3"
                 >
-                    <BasketIcon/>
+                    <IconBasket/>
                 </button>
             </div>
             <NuxtLink :to="`/products/${product.id}`" class="text-sm">{{ product.name }}</NuxtLink>

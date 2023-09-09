@@ -33,7 +33,7 @@
                                     class="block mx-auto mb-4 object-contain bg-slate-50"
                                 >
                                 <button class="absolute bottom-2 right-0 flex items-center justify-center bg-gray-900 text-white shadow-md w-8 h-8 rounded-full m-2">
-                                    <BasketIcon/>
+                                    <IconBasket/>
                                 </button>
                             </div>
                             <span class="font-semibold">

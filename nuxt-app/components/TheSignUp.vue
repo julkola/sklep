@@ -3,45 +3,30 @@
         @submit.prevent="sign"
         class="flex flex-col w-96 px-4 py-2"
     >
-        <label
-            for="username"
-            class="mb-2"
+        <InputLogin
+            name="username"
+            :required="true"
+            :modelValue="username"
+            @update:modelValue="newValue => username = newValue"
         >
             Login
-        </label>
-        <input
-            type="text"
-            name="username"
-            id="username"
-            v-model="props.username"
-            class="h-10 rounded-full bg-slate-50 shadow-inner pl-4 pr-12 mb-3"
-        >
-        <label
-            for="password"
-            class="mb-2"
+        </InputLogin>
+        <InputPassword
+            name="password"
+            :required="true"
+            :modelValue="password"
+            @update:modelValue="newValue => password = newValue"
         >
             Hasło
-        </label>
-        <input
-            type="password"
-            name="password"
-            id="password"
-            v-model="props.password"
-            class="h-10 rounded-full bg-slate-50 shadow-inner pl-4 pr-12 mb-3"
-        >
-        <label
-            for="passwordCopy"
-            class="mb-2"
+        </InputPassword>
+        <InputPassword
+            name="passwordCopy"
+            :required="true"
+            :modelValue="passwordCopy"
+            @update:modelValue="newValue => passwordCopy = newValue"
         >
             Powtórz hasło
-        </label>
-        <input
-            type="password"
-            name="passwordCopy"
-            id="passwordCopy"
-            v-model="passwordCopy"
-            class="h-10 rounded-full bg-slate-50 shadow-inner pl-4 pr-12 mb-3"
-        >
+        </InputPassword>
         <Checkbox
             id="termsAccpet"
             :model-value="termsAccpet"
@@ -71,14 +56,18 @@ const props = defineProps<{
     username:string,
     password:string
 }>();
+const username = ref(props.username);
+const password = ref(props.password);
 const passwordCopy = ref("");
 const termsAccpet = ref(false);
 const newsletter = ref(false);
 const sign = async () => {
+    if (!termsAccpet.value) return;
     if (passwordCopy.value !== props.password) return;
-    const { data:user, error } = await supabase.auth.signUp({
+    const { data:response, error } = await supabase.auth.signUp({
         email: props.username,
         password: props.password,
-    })
+    });
+    // if (response.user) createProfileData(response.user.id);
 }
 </script>

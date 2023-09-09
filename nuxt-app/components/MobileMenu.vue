@@ -5,11 +5,11 @@
     >
         <div class="flex items-center justify-between p-2">
             <div class="flex items-center">
-                <MenuIcon width="36" height="36" class="mr-2"/>
+                <IconMenu width="36" height="36" class="mr-2"/>
                 Menu
             </div>
             <button @click="emit('close')" >
-                <CloseIcon  width="28" height="28"/>
+                <IconClose  width="28" height="28"/>
             </button>
         </div>
         <nuxt-link class="px-2 py-1 mr-4 last:mr-0 relative after:absolute after:h-1 after:bg-gray-900 after:rounded-full after:bottom-0 after:right-0 after:left-0 after:origin-left after:duration-150 after:scale-x-0 hover:after:scale-x-100 cursor-pointer">Włosy</nuxt-link>

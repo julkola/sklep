@@ -14,7 +14,7 @@
                 <Accordion v-for="[key, policy] in policies">
                     <template #header>
                         <span class="flex items-center font-semibold text-lg">
-                            <BasketIcon class="mr-4"/>
+                            <IconBasket class="mr-4"/>
                             {{ policy.name }}
                         </span>
                         <Switch :name="key"/>

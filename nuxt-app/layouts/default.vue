@@ -2,7 +2,7 @@
     <NuxtLoadingIndicator />
     <div class="flex flex-col h-full">
         <TheHeader @openCart="isCartOpen = true" @showLogin="showLogin=true"/>
-        <div class="flex-1 container mx-auto">
+        <div class="flex-1 container mx-auto mt-8 mb-16">
           <slot/>
         </div>
         <TheFooter />
@@ -24,4 +24,5 @@
 const user = useSupabaseUser();
 const isCartOpen = ref(false);
 const showLogin = ref(false);
+
 </script>

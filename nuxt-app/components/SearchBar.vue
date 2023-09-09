@@ -6,7 +6,7 @@
             class="h-10 rounded-full bg-gray-100 shadow-inner pl-4 pr-12"
         >
         <button class="absolute top-0 bottom-0 right-0 flex items-center justify-center bg-gray-900 text-white rounded-full w-10 h-10">
-            <searchIcon></searchIcon>
+            <IconSearch/>
         </button>
         <div
             v-if="isActive"

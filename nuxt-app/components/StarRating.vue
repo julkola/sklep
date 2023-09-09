@@ -1,8 +1,8 @@
 <template>
     <div class="flex gap-1 items-center">
-        <StarFullIcon v-for="_ in fullStars"/>
-        <StarHalfIcon v-if="halfStar"/>
-        <StarEmpty v-for="_ in emptyStars"/>
+        <IconStarFull v-for="_ in fullStars"/>
+        <IconStarHalf v-if="halfStar"/>
+        <IconStarEmpty v-for="_ in emptyStars"/>
         <span class="font-bold">
             {{ roundedRating }}
         </span>

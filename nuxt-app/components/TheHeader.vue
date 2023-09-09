@@ -11,18 +11,24 @@
                         @click="() =>{ if (!user) emits('showLogin') }"
                         class="flex items-center justify-center bg-gray-900 text-white rounded-full w-10 h-10"
                     >
-                        <UserIcon></UserIcon>
+                        <IconUser/>
                     </button>
                     <div
                         v-if="user"
                         class="hidden group-hover:flex group-focus-visible:flex absolute top-full right-1/2 translate-x-1/2 flex-col p-4 shadow-lg rounded-md bg-white"
                     >
-                        <button class="relative px-5 py-2 after:absolute after:bg-gray-100 after:shadow-lg after:rounded-md after:inset-0 after:duration-150 after:opacity-0 hover:after:opacity-100 text-left whitespace-nowrap">
+                        <button
+                            @click="signOut"
+                            class="relative px-5 py-2 after:absolute after:bg-gray-100 after:shadow-lg after:rounded-md after:inset-0 after:duration-150 after:opacity-0 hover:after:opacity-100 text-left whitespace-nowrap"
+                        >
                             <span class="relative z-10">
                                 Wyloguj się
                             </span>
                         </button>
-                        <NuxtLink class="relative px-5 py-2 after:absolute after:bg-gray-100 after:shadow-lg after:rounded-md after:inset-0 after:duration-150 after:opacity-0 hover:after:opacity-100 cursor-pointer whitespace-nowrap">
+                        <NuxtLink
+                            to="/account/"
+                            class="relative px-5 py-2 after:absolute after:bg-gray-100 after:shadow-lg after:rounded-md after:inset-0 after:duration-150 after:opacity-0 hover:after:opacity-100 cursor-pointer whitespace-nowrap"
+                        >
                             <span class="relative z-10">
                                 Moje konto
                             </span>
@@ -31,14 +37,14 @@
                 </div>
 
                 <button class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10">
-                    <HeartIcon></HeartIcon>
+                    <IconHeart/>
                 </button>
                 <button
                     @click="emits('openCart')"
                     :disabled="route === 'cart'"
                     class="flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 sm:px-4 h-10 w-10 sm:w-auto"
                 >
-                    <BasketIcon></BasketIcon>
+                    <IconBasket/>
                     <span class="hidden sm:inline sm:ml-2">
                         {{ cart.sum.toFixed(2) }}&nbsp;zł
                     </span>
@@ -47,7 +53,7 @@
                     @click="showMenu = true"
                     class="sm:hidden flex items-center justify-center bg-gray-900 text-white rounded-full ml-4 w-10 h-10"
                 >
-                    <MenuIcon></MenuIcon>
+                    <IconMenu/>
                 </button>
                 <MobileMenu :showMenu="showMenu" @close="showMenu=false"/>
             </div>
@@ -62,4 +68,8 @@ const route = useRoute().name;
 const cart = useCartStore();
 const emits = defineEmits(["openCart", "showLogin"]);
 const showMenu = ref(false);
+const supabase = useSupabaseClient();
+async function signOut () {
+    const { error } = await supabase.auth.signOut()
+}
 </script>

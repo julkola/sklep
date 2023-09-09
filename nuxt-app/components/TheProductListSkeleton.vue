@@ -10,7 +10,7 @@
                     disabled
                     class="rounded-full bg-gray-400 shadow text-white w-8 h-8 flex justify-center items-center absolute bottom-3 right-3"
                 >
-                    <BasketIcon/>
+                    <IconBasket/>
                 </button>
             </div>
             <div class="h-3.5 w-full my-1.5 bg-gray-300 animate-pulse rounded-full" ></div>

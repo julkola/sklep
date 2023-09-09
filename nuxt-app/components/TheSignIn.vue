@@ -4,10 +4,16 @@
         class="flex flex-col w-96 px-4 py-2"
     >
         <span
-            v-if="error"
-            class="block mb-4  px-6 py-3 bg-red-50 text-red-900 rounded-lg"
+            v-show="error"
+            class="block mb-4 px-6 py-2 text-sm bg-red-100 text-red-700 rounded-lg shadow-lg shadow-red-50"
         >
             Podano błędne dane
+        </span>
+        <span
+            v-show="user"
+            class="block text-center mb-4 px-6 py-2 text-sm bg-emerald-100 text-teal-700 rounded-lg shadow-lg shadow-emerald-50 font-semibold"
+        >
+            Zalogowano
         </span>
         <label
             for="login-username"
@@ -38,7 +44,7 @@
                 @click="showPassword=!showPassword"
                 class="absolute grid place-items-center right-0 mr-2 inset-y-0 w-10 rounded-full text-gray-700"
             >
-                <EyeIcon />
+                <IconEye />
             </button>
         </div>
         <div class="">
@@ -67,11 +73,13 @@ const showPassword = ref(false);
 const username = ref(props.username);
 const password = ref(props.password);
 const error = ref();
+const user = ref();
 const sign = async () => {
-    const response = await supabase.auth.signInWithPassword({
+    const { data, error: loginError } = await supabase.auth.signInWithPassword({
         email: username.value,
         password: password.value,
     })
-    error.value = response.error;
+    error.value = loginError;
+    if (data.user) user.value = data.user;
 }
 </script>

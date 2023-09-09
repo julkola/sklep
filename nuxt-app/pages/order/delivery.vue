@@ -5,7 +5,7 @@
   <form
     action="/order/payment"
     method="post"
-    @submit.prevent="(e) => { checkData(e as SubmitEvent) }"
+    ref="form"
   >
     <DeliveryOptions class="mb-8"/>
     <h2 class="text-2xl mb-6 font-semibold text-gray-900">
@@ -16,13 +16,13 @@
         <h3 class="text-lg font-semibold text-gray-900">
           Adres dostawy
         </h3>
-        <DeliveryAddressForm/>
+        <DeliveryAddressForm @is-all-valid="(valid) => isAddressValid = valid"/>
       </fieldset>
       <fieldset class="px-6 py-4 shadow-lg rounded-lg">
         <h3 class="text-lg font-semibold text-gray-900">
           Dane kontaktowe
         </h3>
-        <DeliveryContactForm/>
+        <DeliveryContactForm @is-all-valid="(valid) => isUserDataValid = valid"/>
       </fieldset>
     </div>
     <div class="flex justify-between items-center mt-6">
@@ -35,7 +35,7 @@
       <button
         type="submit"
         class="bg-gray-900 disabled:bg-gray-400 :text-gray-900 text-white rounded-full my-4 py-1 px-6 shadow-lg"
-        :disabled="!dataIsValid"
+        :disabled="!isAddressValid || !isUserDataValid"
       >
         Przejdź do wyboru płatności
       </button>
@@ -46,15 +46,8 @@
 definePageMeta({
   layout: "order",
 });
-const dataIsValid = ref(false);
-function checkData (e: SubmitEvent) {
-  const data = new FormData(<HTMLFormElement>e.currentTarget);
-  data.forEach((x, k)=>{
-    console.log(k, x);
-  })
-  const inputs = (<HTMLFormElement>e.currentTarget).querySelectorAll("input");
-  inputs.forEach((input) => {
-    console.log(input, input.validity.valid)
-  })
-}
+const form = ref();
+const isAddressValid = ref(false);
+const isUserDataValid = ref(false);
+
 </script>

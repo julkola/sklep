@@ -1,6 +1,6 @@
 <template>
     <div class="lg:flex items-start px-4 py-4 ">
-        <div class="w-60 mr-4 px-6 py-4 rounded shadow-lg">
+        <div class="sticky top-28 w-60 mr-4 px-6 py-4 rounded shadow-lg">
             <TheCategoryTree :currentCategory="currentCategory" />
             <Filters
                 v-if="currentCategory?.filters.length > 0"
@@ -20,7 +20,7 @@
             >
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum sapiente aut, fugit rerum rem atque pariatur deleniti quibusdam porro voluptate libero quod inventore corrupti eos illum suscipit voluptatum eveniet impedit!
             </p>
-            <TheProductsNotFound v-if="!prodcutsAreLoading &&productError && productError.statusCode === 404" />
+            <TheProductsNotFound v-if="!prodcutsAreLoading && productError && productError.statusCode === 404" />
             <TheProductListSkeleton v-if="false" />
             <TheProductList
                 v-if="products"

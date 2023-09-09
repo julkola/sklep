@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     });
     else if (products.length === 0)  throw createError({
         statusCode: 404,
-        statusMessage: "Products Not Found"
+        statusMessage: "Product Not Found"
     });
 
     return products as unknown as any[]

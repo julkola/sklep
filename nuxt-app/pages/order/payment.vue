@@ -29,7 +29,7 @@
                     </span>
                 </div>
                 <div class="check scale-0 absolute bottom-3 right-3 grid place-items-center bg-emerald-100 text-teal-700 rounded-full w-6 h-6 transition-transform duration-300 ease-out">
-                    <CheckIcon  />
+                    <IconCheck  />
                 </div>
             </label>
         </div>

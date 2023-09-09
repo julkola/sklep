@@ -1,5 +1,8 @@
 <template>
-    <main class="text-gray-900">
+    <main 
+        v-if="!error"
+        class="text-gray-900"
+    >
         <div class="flex">
             <ProductGallery/>
             <div class="ml-4 flex-1">
@@ -22,7 +25,7 @@
                         height="60px"
                         class="object-contain bg-slate-200"
                     >
-                    <StarRating :rating="product.rating"/>
+                    <StarRating v-if="product.rating" :rating="product.rating"/>
                 </div>
                 <div class="flex flex-col items-end mt-4 mb-6 text-gray-900">
                     <span
@@ -47,7 +50,7 @@
                         Dodaj do obserwowanych
                     </span>
                     <button class="flex items-center justify-center ml-4 rounded-full w-9 h-9 text-gray-600 bg-gray-200">
-                        <HeartIcon/>
+                        <IconHeart/>
                     </button>
                 </div>
             </div>
@@ -86,16 +89,17 @@
         </div>
     </main>
     <div
-        v-if="pending"
-        class="px-6 py-4 bg-black bg-opacity-50 fixed inset-0"
+        v-else
+        class="bg-red-200 text-red-700 text-center px-6 py-4 rounded-xl shadow-lg"
     >
-        Loading...
+        {{ error.statusMessage }}
     </div>
+    <Loading v-if="pending" />
 </template>
 <script setup lang="ts">
-const route = useRoute();
+const route = useRouter().currentRoute.value;
 const product = ref();
-const { data: response, pending, error }  = await useLazyFetch(() => `/api/product/${route.params.id}`);
-product.value = response.value?.data;
+const { data: response, pending, error }  = await useLazyFetch(`/api/product/${route.params.id}`);
+product.value = response.value;
 const currentTab = ref("description");
 </script>

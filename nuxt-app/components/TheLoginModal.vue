@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="flex w-96 mx-auto overflow-hidden">
-            <TheLogin 
+            <TheSignIn 
                 :username="username"
                 :password="password"
                 class="flex-none w-96 transition-transform duration-200 ease-out"
