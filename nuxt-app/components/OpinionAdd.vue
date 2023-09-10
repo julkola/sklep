@@ -21,7 +21,7 @@
                     name="rating"
                     class="absolute opacity-0 peer"
                 >
-                <StarEmpty class="absolute"/>
+                <IconStarEmpty class="absolute"/>
                 <IconStarFull
                     class="absolute"
                     :class="n<=rating ? 'opacity-100' : ' opacity-30'"
@@ -42,7 +42,7 @@
             Oceniasz jako: {{ userName }}
         </span>
         <button
-            :disabled="pending"
+            :disabled="pending || opinion.length < 10"
             class="relative grid place-items-center mt-4 bg-gradient-to-br from-gray-200 to-indigo-200 disabled:bg-gray-200 disabled:bg-none text-gray-900 rounded-full shadow-lg px-6 h-8"
         >
             <IconLoader v-show="pending" class="absolute animate-spin"/>
@@ -76,8 +76,8 @@ const { data: currentOpinion, error: _ } = await supabase
     .eq('user_id',  user.value.id)
     .eq('product_id', productId)
 
-hasOpinion.value = !(currentOpinion && currentOpinion.length > 0);
-
+hasOpinion.value = !!(currentOpinion && currentOpinion.length > 0);
+console.log(currentOpinion)
 if (user.value) {
     const { data: profile, error } = await supabase
         .from('Profiles')

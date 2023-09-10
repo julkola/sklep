@@ -34,7 +34,7 @@
                             </p>
                         </div>
                         <NuxtLink
-                            to="/cart"
+                            to="/order/cart"
                             class="text-center bg-gradient-to-br from-gray-200 to-indigo-200 disabled:bg-gray-200 text-gray-900 rounded-full block my-4 py-1 px-6 shadow-lg"
                         >
                             Przejdź do koszyka

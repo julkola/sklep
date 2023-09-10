@@ -3,7 +3,7 @@
         v-if="!error"
         class="text-gray-900"
     >
-        <div class="flex">
+        <div class="md:flex">
             <ProductGallery/>
             <div class="ml-4 flex-1">
                 <strong
