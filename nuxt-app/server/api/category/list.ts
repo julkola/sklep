@@ -19,5 +19,12 @@ export default defineEventHandler(async (event) => {
             `)
             .eq('id', queryParams.categoryId!)
             .single();
-    return currentCategory;
+
+    const { data: children, error: childrenError } =
+        await supabase
+            .from('Category')
+            .select('*')
+            .eq('parent_id', queryParams.categoryId!)
+        
+    return { ...currentCategory, children: children };
 })

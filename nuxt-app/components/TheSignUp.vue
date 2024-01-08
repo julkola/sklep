@@ -5,25 +5,19 @@
     >
         <InputLogin
             name="username"
-            :required="true"
-            :modelValue="username"
-            @update:modelValue="newValue => username = newValue"
+            v-model="username"
         >
             Login
         </InputLogin>
         <InputPassword
             name="password"
-            :required="true"
-            :modelValue="password"
-            @update:modelValue="newValue => password = newValue"
+            v-model="password"
         >
             Hasło
         </InputPassword>
         <InputPassword
             name="passwordCopy"
-            :required="true"
-            :modelValue="passwordCopy"
-            @update:modelValue="newValue => passwordCopy = newValue"
+            v-model="passwordCopy"
         >
             Powtórz hasło
         </InputPassword>

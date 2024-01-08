@@ -66,4 +66,6 @@ const paymentOptions = [
 definePageMeta({
   layout: "order",
 });
+const route = useRoute();
+console.log(route.query)
 </script>

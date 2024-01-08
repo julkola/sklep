@@ -1,32 +1,40 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: [
-      '@nuxtjs/supabase',
-      '@pinia/nuxt',
-      '@pinia-plugin-persistedstate/nuxt',
+  modules: [
+    '@nuxtjs/supabase',
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+  ],
+  pinia: {
+    autoImports: [
+      // automatically imports `defineStore`
+      'defineStore', // import { defineStore } from 'pinia'
+      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
-    pinia: {
-      autoImports: [
-        // automatically imports `defineStore`
-        'defineStore', // import { defineStore } from 'pinia'
-        ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
-      ],
+  },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
     },
-    postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
-      },
-    },
-    css: [
-        '@/assets/css/main.css',
-    ],
-    routeRules: {
-      '/account/*': {
-        ssr: false,
-      }
-    },
-    supabase: {
-      redirect: false,
+  },
+  css: [
+      '@/assets/css/main.css',
+  ],
+  routeRules: {
+    '/account/*': {
+      ssr: false,
     }
+  },
+  supabase: {
+    redirect: false,
+  },
+  vite: {
+    vue: {
+      script: {
+          defineModel: true,
+          propsDestructure: true
+      }
+    }
+  }
 })

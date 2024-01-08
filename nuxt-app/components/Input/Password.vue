@@ -11,8 +11,7 @@
             :type="(showPassword) ? 'text' : 'password'"
             :id="name"
             :name="name"
-            :placeholder="placeholder"
-            :value="modelValue"
+            v-model="modelValue"
             @input="(e) => { onInput(e) }"
             required
             minlength="6"
@@ -49,16 +48,12 @@
 const emits = defineEmits(['update:modelValue'])
 const props = defineProps<{
     name: string,
-    required: boolean,
-    placeholder?: string,
-    modelValue?: string,
 }>();
-const input = ref();
+const modelValue = defineModel();
 const isValid = ref();
 const showPassword = ref(false);
 
 function onInput (e: Event) {
-    emits('update:modelValue', (<HTMLInputElement>e.currentTarget).value);
     isValid.value = (<HTMLInputElement>e.currentTarget).validity.valid;
 }
 </script>

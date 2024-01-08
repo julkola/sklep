@@ -22,3 +22,13 @@
     </div>
 
 </template>
+<script setup lang="ts">
+const formData = ref();
+provide("formData", {
+    formData,
+    updateFormData
+});
+function updateFormData (data: FormData) {
+    formData.value = data;
+}
+</script>

@@ -12,8 +12,7 @@
             :id="name"
             :name="name"
             required
-            :placeholder="placeholder"
-            :value="modelValue"
+            v-model="modelValue"
             @input="(e) => { onInput(e) }"
             class="h-10 w-full rounded-full bg-slate-50 shadow-inner pl-4 pr-12"
         >
@@ -31,18 +30,13 @@
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(['update:modelValue'])
 const props = defineProps<{
     name: string,
-    required: boolean,
-    placeholder?: string,
-    modelValue?: string,
 }>();
-const input = ref();
+const modelValue = defineModel();
 const isValid = ref();
 
 function onInput (e: Event) {
-    emits('update:modelValue', (<HTMLInputElement>e.currentTarget).value);
     isValid.value = (<HTMLInputElement>e.currentTarget).validity.valid;
 }
 </script>

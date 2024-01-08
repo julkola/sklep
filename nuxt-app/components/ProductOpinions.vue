@@ -20,7 +20,10 @@
                 {{ (new Date(opinion['created_at'])).toLocaleDateString() }}
             </time>
         </div>
-        <OpinionAdd :productId="productId" @addOpinion="(opinion) => { opinions?.push(opinion) }"/>
+        <OpinionAdd
+            :productId="productId"
+            @addOpinion="(opinion) => { opinions?.push(opinion) }"
+        />
     </div>
 </template>
 <script setup lang="ts">

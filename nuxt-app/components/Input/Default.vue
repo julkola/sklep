@@ -11,16 +11,11 @@
         </label>
         <input
             ref="input"
-            :type="type ? type : 'text'"
             :id="name"
             :name="name"
             :required="required"
-            :placeholder="placeholder"
-            :value="value"
-            :pattern="pattern"
-            :minlength="min"
-            :maxlength="max"
-            :inputmode="inputMode"
+            v-model="modelValue"
+            v-bind="$attrs"
             @input="(e) => { onInput(e) }"
             class="w-full px-6 pt-3 pb-2 bg-slate-50 shadow-inner rounded-full"
         >
@@ -38,20 +33,13 @@
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(['update:modelValue', 'validate'])
+const emits = defineEmits(['validate'])
 const props = defineProps<{
     name: string,
     required: boolean,
-    placeholder?: string,
-    modelValue?: string,
-    pattern?: string,
-    min?: number,
-    max?: number,
-    type?: string,
-    inputMode?: ("text" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | "search" | undefined)
 }>();
+const modelValue = defineModel<any>();
 const input = ref();
-const value = ref(props.modelValue)
 const isValid = ref();
 
 onMounted(() => {
@@ -60,7 +48,6 @@ onMounted(() => {
     emits('validate', input.value.name, isValid.value);
 })
 function onInput (e: Event) {
-    emits('update:modelValue', (<HTMLInputElement>e.currentTarget).value);
     isValid.value = (<HTMLInputElement>e.currentTarget).validity.valid;
     emits('validate', input.value.name, isValid.value);
 }

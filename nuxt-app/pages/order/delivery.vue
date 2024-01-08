@@ -4,7 +4,6 @@
   </h1>
   <form
     action="/order/payment"
-    method="post"
     ref="form"
   >
     <DeliveryOptions class="mb-8"/>
@@ -46,8 +45,6 @@
 definePageMeta({
   layout: "order",
 });
-const form = ref();
 const isAddressValid = ref(false);
 const isUserDataValid = ref(false);
-
 </script>

@@ -3,8 +3,7 @@
         name="street"
         :required="true"
         placeholder="Przykładowa"
-        :modelValue="street"
-        @update:modelValue="newValue => street = newValue"
+        v-model="street"
         @validate="mapValidity"
     >
         Ulica
@@ -17,8 +16,8 @@
             class="flex-1 mr-4"
             pattern="[0-9]*"
             inputMode="numeric"
-            :modelValue="streetNumber"
-            @update:modelValue="newValue => streetNumber = newValue"
+            disabled
+            v-model="streetNumber"
             @validate="mapValidity"
         >
             Nr domu
@@ -30,8 +29,7 @@
             class="flex-1"
             pattern="[0-9]*"
             inputMode="numeric"
-            :modelValue="flatNumber"
-            @update:modelValue="newValue => flatNumber = newValue"
+            v-model="flatNumber"
             @validate="mapValidity"
         >
             Nr mieszkania
@@ -42,8 +40,7 @@
         :required="true"
         placeholder="12-345"
         pattern="[0-9]{2}-[0-9]{3}"
-        :modelValue="postalCode"
-        @update:modelValue="newValue => postalCode = newValue"
+        v-model="postalCode"
         @validate="mapValidity"
     >
         Kod pocztowy
@@ -51,8 +48,7 @@
     <InputDefault
         name="city"
         :required="true"
-        :modelValue="city"
-        @update:modelValue="newValue => city = newValue"
+        v-model="city"
         placeholder="Ciechocinek"
         @validate="mapValidity"
     >
@@ -112,5 +108,16 @@ function mapValidity (name: string, validity: boolean) {
     if (value === false) isAllValid = false
     })
     emits("isAllValid", isAllValid)
+}
+const supa =  useSupabaseClient();
+const { data: session} = await supa.auth.getSession();
+if (user.value) {
+    const { pending, data, error } = await useFetch('/api/user/get/', {
+        headers: {
+            access_token: session.session!.access_token,
+            refresh_token: session.session!.refresh_token
+        }
+    })
+    console.log(user.value, data.value);
 }
 </script>

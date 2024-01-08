@@ -70,15 +70,14 @@ const emits = defineEmits(["addOpinion"]);
 const { productId } = defineProps<{
     productId: number
 }>();
-const { data: currentOpinion, error: _ } = await supabase
-    .from('Opinions')
-    .select('id')
-    .eq('user_id',  user.value.id)
-    .eq('product_id', productId)
-
-hasOpinion.value = !!(currentOpinion && currentOpinion.length > 0);
-console.log(currentOpinion)
 if (user.value) {
+    const { data: currentOpinion, error: _ } = await supabase
+        .from('Opinions')
+        .select('id')
+        .eq('user_id',  user.value.id)
+        .eq('product_id', productId)
+    
+    hasOpinion.value = !!(currentOpinion && currentOpinion.length > 0);
     const { data: profile, error } = await supabase
         .from('Profiles')
         .select(`

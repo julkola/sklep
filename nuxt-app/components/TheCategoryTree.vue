@@ -1,7 +1,6 @@
 <template>
     <div
         v-if="currentCategory"
-        class=""
     >
         <NuxtLink
             v-if="currentCategory.parent"
