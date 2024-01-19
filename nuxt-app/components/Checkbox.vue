@@ -20,15 +20,6 @@
 <script setup lang="ts">
     const props = defineProps<{
         id: string,
-        modelValue?: any
     }>();
-    const emits = defineEmits(['update:modelValue'])
-    const value = computed({
-        get() {
-            return props.modelValue
-        },
-        set(value) {
-            emits('update:modelValue', value)
-        }
-    })
+    const value = defineModel("value");
 </script>
