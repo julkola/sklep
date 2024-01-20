@@ -5,14 +5,14 @@
                 {{ filter.name }} {{ getFilterSize(filter.id)}}
             </span>
             <div>
-                <Checkbox
+                <InputCheckbox
                     v-for="option in filter.options"
                     :id="`filter-${filter.id}-${option.id}`"
                     :value="currentFilters"
                     @update:modelValue="(val: boolean) => updateFilters(val, option.id, filter.id)"
                 >
                     {{ option.value }}
-                </Checkbox>
+                </InputCheckbox>
             </div>
         </div>
         <button

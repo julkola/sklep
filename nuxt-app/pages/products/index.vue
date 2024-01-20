@@ -16,11 +16,11 @@
             >
                 &times
             </button>
-            <TheCategoryTree
+            <ProductListCategoryTree
                 :currentCategoryId="currentCategoryId"
                 class="hidden lg:block"
             />
-            <Filters
+            <ProductListFilters
                 v-if="currentCategory?.filters && currentCategory?.filters.length > 0"
                 :currentCategory="currentCategory"
                 class="mt-4"
@@ -43,7 +43,7 @@
                 v-if="products"
                 :products="products"
             />
-            <ListFooter
+            <ProductListFooter
                 v-if="products"
                 :page="routeQuery.page ? +routeQuery.page : 1"
                 :perPage="routeQuery.perPage ? +routeQuery.perPage : 10"

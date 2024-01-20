@@ -49,7 +49,7 @@
             v-if="categoryTree.pending.value"
             class="relative"
         >
-            <Loading />
+            Loading...
         </div>
         <p
             v-if="categoryTree.error.value"

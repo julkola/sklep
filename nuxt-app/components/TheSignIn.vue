@@ -48,9 +48,9 @@
             </button>
         </div>
         <div class="">
-            <Checkbox id="remembreme">
+            <InputCheckbox id="remembreme">
                 Zapamiętaj mnie
-            </Checkbox>
+            </InputCheckbox>
             <NuxtLink to="/password-rematch">
                 Zapomniałem hasła
             </NuxtLink>
