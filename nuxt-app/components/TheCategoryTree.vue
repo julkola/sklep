@@ -75,6 +75,5 @@ const categoryTree = await useFetch<CatTree>("/api/category/tree", {
         categoryId: computed(() => currentCategoryId),
     },
 });
-console.log('tree',categoryTree.data.value?.ancestors)
 
 </script>
