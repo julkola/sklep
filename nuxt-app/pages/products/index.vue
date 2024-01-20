@@ -17,20 +17,17 @@
                 &times
             </button>
             <TheCategoryTree
-                :currentCategory="currentCategory"
+                :currentCategoryId="currentCategoryId"
                 class="hidden lg:block"
             />
             <Filters
-                v-if="currentCategory?.filters.length > 0"
+                v-if="currentCategory?.filters && currentCategory?.filters.length > 0"
                 :currentCategory="currentCategory"
                 class="mt-4"
             />
         </div>
         <div class="flex-1 ">
-            <h1
-                :key="currentCategoryId"
-                class="font-bold text-xl mb-4"
-            >
+            <h1 class="font-bold text-xl mb-4" >
                 {{ currentCategory ? currentCategory.name : "Produkty" }}
             </h1>
             <p
@@ -67,7 +64,7 @@ const { data: currentCategory, error, pending } = await useFetch(`/api/category/
         categoryId: currentCategoryId,
     }
 });
-console.log(currentCategory.value);
+
 const { data: products, error: productError, pending: prodcutsAreLoading } = await useFetch(`/api/product`, {
     query: {
         categoryId: currentCategoryId,
