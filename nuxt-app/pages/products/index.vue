@@ -21,14 +21,14 @@
                 class="hidden lg:block"
             />
             <ProductListFilters
-                v-if="currentCategory?.filters && currentCategory?.filters.length > 0"
-                :currentCategory="currentCategory"
+                v-if="!pending && currentCategory?.filters && currentCategory?.filters.length > 0"
+                :categoryFilters="currentCategory.filters"
                 class="mt-4"
             />
         </div>
         <div class="flex-1 ">
             <h1 class="font-bold text-xl mb-4" >
-                {{ currentCategory ? currentCategory.name : "Produkty" }}
+                {{ currentCategory && currentCategory.name ? currentCategory.name : "Produkty" }}
             </h1>
             <p
                 class="mb-6"

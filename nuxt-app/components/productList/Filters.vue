@@ -2,14 +2,14 @@
     <div id="filters">
         <div v-for="filter in categoryFilters">
             <span>
-                {{ filter.name }} {{ getFilterSize(filter.id)}}
+                {{ filter.name }} {{ (<CheckFilter>currentFilters.get(filter.id))?.values.size ?? "" }}
             </span>
             <div>
                 <InputCheckbox
                     v-for="option in filter.options"
                     :id="`filter-${filter.id}-${option.id}`"
                     :value="currentFilters"
-                    @update:modelValue="(val: boolean) => updateFilters(val, option.id, filter.id)"
+                    @update:value="(v:boolean) => update(v, option.id, filter.id)"
                 >
                     {{ option.value }}
                 </InputCheckbox>
@@ -26,62 +26,34 @@
     </div>
 </template>
 <script setup lang="ts">
-enum FilterTypeEnum {
-    number,
-    checks
-}
-
-interface SliderFilter {
-    type: FilterTypeEnum.number,
-    min: number,
-    max: number
-}
-
-interface CheckFilter {
-    type: FilterTypeEnum.checks,
-    values: Set<string | number>,
-}
-
-type Filter = CheckFilter | SliderFilter;
-type FilterMap = Map<string, Filter>;
+import { haveFiltersChanged } from "~/composables/filters/compare";
+import { copyFilterMap } from "~/composables/filters/duplicate-map";
+import { updateFilters } from "~/composables/filters/update";
+import { CheckFilter, SliderFilter, FilterMap, FilterTypeEnum } from "~/types/filters";
 
 const { categoryFilters } = defineProps(["categoryFilters"]);
 
 const currentFilters: Ref<FilterMap> = ref(new Map());
+const prevFilters: Ref<FilterMap> = ref(new Map(currentFilters.value));
 
-const prevFilters: FilterMap = currentFilters.value;
+const filtersChanged = ref(false);
 
-const filtersChanged: ComputedRef<boolean> = computed(() => currentFilters.value === prevFilters);
-
-function getFilterSize (filterId: string) {
-    const filter = currentFilters.value.get(filterId) as CheckFilter;
-    if (!filter) return "";
-    return filter.values.size;
-}
-function updateFilters (
+function update (
     checked: boolean,
     optionId: string | number,
-    filterId: string
+    filterId: string,
 ) {
-    const filter: CheckFilter | undefined = currentFilters.value.get(filterId) as CheckFilter;
-    if (filter) {
-        if (checked) {
-            filter.values.add(optionId);
-        } else {
-            filter.values.delete(optionId);
-            if (filter.values.size < 1) {
-                currentFilters.value.delete(filterId)
-            }
-        }
-    } else {
-        const newFilter: CheckFilter = {
-            type: FilterTypeEnum.checks,
-            values: new Set([optionId]),
-        }
-        currentFilters.value.set(filterId, newFilter);
-    }
+    console.log(checked)
+    updateFilters(checked, optionId, filterId, currentFilters)
 }
+
+watch(
+    [ currentFilters, prevFilters ],
+    () => filtersChanged.value = haveFiltersChanged(currentFilters.value, prevFilters.value),
+    { deep: true }
+)
+
 function filter () {
-    console.log(currentFilters.value);
+    copyFilterMap(currentFilters, prevFilters);
 }
 </script>
